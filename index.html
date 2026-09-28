@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Tails Inventory Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="sidebar">
+            <div class="logo-info-container">
+                <img src="images/ChatGPT Image Aug 23, 2026, 07_54_40 PM.png" alt="pets-tails-logo">
+                <div class="logo-info-text">
+                    <h2>Pets Tails</h2>
+                    <p>Pet Supplies</p>
+                </div>
+            </div>
+            <div class="side-bar-buttons">
+                <button id="dashboard-button">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </button>
+                <button id="inventory-button">
+                    <i class="fa-solid fa-box"></i>
+                    Inventory
+                </button>
+                <button id="categories-button">
+                    <i class="fa-regular fa-folder"></i>
+                    Categories
+                </button>
+                <button id="suppliers-button">
+                    <i class="fa-solid fa-users"></i>
+                    Suppliers
+                </button>
+                <hr class="sidebar-divider">
+                <div class="sidebar-order-container">
+                    <button id="orders-button">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <p>Orders / <br> Special Orders</p>
+                    </button>
+                </div>
+            </div>
+            <div class="user-container">
+                    <button id="user-select">
+                        <img src="/images/ChatGPT Image Aug 23, 2026, 07_54_40 PM.png" alt="logo">
+                        <div class="user-info">
+                            <h3 id="user-name"><!-- Jane Smith --></h3>
+                            <span id="user-job-title"><!-- Store Owner --></span>
+                        </div>
+                        <div class="user-button-icon">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </button>
+                </div>
+        </div>
+        <main>
+            <header>
+                    <div class="header-parent">
+                        <div class="header-title">
+                            <h1>Inventory</h1>
+                            <p>Manage pet food, acessories and stock levels.</p>
+                        </div>
+                        <div class="heading-buttons">
+                            <button id="special-orders-button">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                                Special Order
+                            </button>
+                            <button id="add-product-button">
+                                <i class="fa-solid fa-plus"></i>
+                                Add product
+                            </button>
+                        </div>
+                </div>
+            </header>
+    
+            <section class="summary">
+                <div class="stock-summary">
+                    <div class="total-products">
+                        <div class="stock-summary-icon">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <div class="total-products-text" id="total-products-text">
+                            <h3 class="summary-title">Total Products</h3>
+                            <span id="total-products-counter"><!-- 286 --></span>
+                            <p>Across <span id="categories-counter"><!-- 8 --></span> categories</p>
+                        </div>
+                    </div>
+                    <div class="total-stock-units">
+                        <div class="stock-summary-icon">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <div class="total-stock-units-text" id="">
+                            <h3 class="summary-title">Total Stock Units</h3>
+                            <span id="total-stock-units"><!-- 2438 --></span>
+                        </div>
+                    </div>
+                    <div class="low-stock-container">
+                        <div class="low-stock-icon">
+                            <i class="fa-solid fa-triangle-exclamation" id="low-stock-i"></i>
+                        </div>
+                        <div class="low-stock-text">
+                            <h3 class="summary-title">Low Stock</h3>
+                            <span id="low-stock-counter"><!-- 14 --></span>
+                        </div>
+                    </div>
+                    <div class="inventory-value">
+                        <div class="stock-summary-icon">
+                        <i class="fa-solid fa-sterling-sign"></i>
+                        </div>
+                        <div class="inventory-value-text">
+                            <h3 class="inventory-value">Inventory Value</h3>
+                            <span id="inventory-value-counter"><!-- £18,420 --></span>
+                        </div>
+                    </div> 
+                </div>
+            </section>
+
+            <section class="stock-warning">
+                <div class="stock-warning-container" id="stock-warning-container">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div class="stock-warning-text">
+                        <h3><span id="stock-warning-number"></span> products need attention</h3>
+                        <p>These prodcuts have reached or fallen below their minimum stock level.</p>
+                    </div>
+                    <button id="view-low-stock">
+                            <p>View low stock</p>
+                            <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+    
+            <section class="charts">
+                <div class="charts-container">
+                    <div class="stock-category-container">
+                        <h3>Stock by Category</h3>
+                            <div class="stock-category-display">
+                                <canvas id="stock-category-chart"></canvas>
+                            </div>
+                    </div>
+                    <div class="stock-health-container">
+                        <h3>Stock Health</h3>
+                        <div class="stock-health-info">
+                            <div class="stock-health-display">
+                                <canvas id="stock-health-chart"></canvas>
+                            </div>
+                            <div class="stock-health-labels">
+                                <div class="in-stock-label">
+                                    <i class="fa-solid fa-circle"></i>
+                                    <div class="in-stock-span">
+                                        <span>In Stock <span id="health-inStock-value"></span></span>
+                                    </div>
+                                </div>
+                                <div class="low-stock-label">
+                                    <i class="fa-solid fa-circle"></i>
+                                    <div class="low-stock-span">
+                                        <span>Low Stock <span id="health-lowStock-value"></span></span>
+                                    </div>
+                                </div>
+                                <div class="no-stock-label">
+                                <i class="fa-solid fa-circle"></i>
+                                <div class="no-stock-span">
+                                <span>Out of Stock <span id="health-noStock-value"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="stock-view">
+                <div class="stock-view-container">
+                    <form id="stock-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search products, SKU or supplier..." autocomplete="off" id="stock-search-input">
+                    </form>
+                    <select id="categories-select">
+                        <option value="all">All Categories</option>
+                        <option value="dogFood">Dog Food</option>
+                        <option value="catFood">Cat Food</option>
+                        <option value="treats">Treats</option>
+                        <option value="toys">Toys</option>
+                        <option value="bedding">Bedding</option>
+                        <option value="collarsLeads">Collars & Leads</option>
+                        <option value="grooming">Grooming</option>
+                        <option value="accesories">Other Accessories</option>
+                    </select>
+                    <select id="stock-level-select">
+                        <option value="allStock">All Stock</option>
+                        <option value="inStock">In Stock</option>
+                        <option value="lowStock">Low Stock</option>
+                        <option value="noStock">Out of Stock</option>
+                    </select>
+                    <select id="sort-by-select">
+                        <option value="" disabled selected hidden>Sort by</option>
+                        <option value="costPriceLtoH">Cost Price Low to High</option>
+                        <option value="costPriceHtoL">Cost Price High to Low</option>
+                        <option value="marginLtoH">Margin Low to High</option>
+                        <option value="marginHtoL">Margin High to Low</option>
+                    </select>
+                    <button id="clear-filter">
+                        Clear Filters
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                </div>
+                <table>
+                    <thead class="stock-list-active-filter ">
+                        <tr>
+                            <th>SKU</th>
+                            <th>
+                                <button id="product-name-filter">
+                                    <p>Product Name <i class="fa-solid fa-sort"></i></p>
+                                </button>
+                            </th>
+                            <th>Category</th>
+                            <th>Supplier</th>
+                            <th>
+                                <button id="stock-filter">
+                                    <p>Stock <i class="fa-solid fa-sort"></i></p>
+                                </button>
+                            </th>
+                            <th>Min Stock</th>
+                            <th>Status</th>
+                            <th>Cost Price</th>
+                            <th>
+                                <button id="price-filter">
+                                    <p>Price <i class="fa-solid fa-sort"></i></p>
+                                </button>
+                            </th>
+                            <th>Margin</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                <tbody class="stock-list" id="stock-list">
+                    <!-- <tr>
+                        <td id="SKU">DOG001</td>
+                        <td>
+                            <img src="images/Gemini_Generated_Image_d0mv86d0mv86d0mv.jpg" alt="">
+                            Burns adult dog food 15kg
+                        </td>
+                        <td>Dog Food</td>
+                        <td>Burns Pet Nutrition</td>
+                        <td>24</td>
+                        <td>10</td>
+                        <td>In Stock</td>
+                        <td>£25.50</td>
+                        <td>£38.99</td>
+                        <td>34%</td>
+                        <td>
+                            <button><i class="fa-solid fa-pencil"></i></button>
+                            <button><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr> -->
+                </tbody>
+                </table>
+                <div class="under-bar">
+                    <p>Showing <span id="under-bar-product-count"></span> products</p>
+                    <div class="page-selector">
+                        <button id="previous-page" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="page-numbers" id="page-numbers">
+                        </div>
+                        <button id="next-page" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div class="rows-per-page-container">
+                        <label for="rows-per-page">Rows per page:</label>
+                            <select id="rows-per-page">
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                            </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="product-form" id="product-form"></div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
